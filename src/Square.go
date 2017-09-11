@@ -5,50 +5,68 @@ import (
   "sync"
 )
 
-var (
-  num int = 0
-  possibly = []bool{false, true, true, true, true, true, true, true, true, true}
-  mutex = &sync.Mutex{}
-)
+// num int = 0
+// possibly = []bool{false, true, true, true, true, true, true, true, true, true}
+// mutex = &sync.Mutex{}
 
-func main() {
-  fmt.Println(num)
-  fmt.Println(possibly)
+type square struct {
+  num int
+  possibly []bool
+  mutex sync.Mutex
 }
 
-func check_column() {
+// func main() {
+//   fmt.Println(num)
+//   fmt.Println(possibly)
+// }
 
+func print_stuff(this square) {
+  fmt.Println(this.num)
+  fmt.Println(this.possibly)
 }
 
-func check_row() {
-
-}
-
-func check_local_box() {
-
-}
-
-func update_possibly_list(numbers []int) {
-  mutex.Lock()
-  for n := range numbers {
-      possibly[n] = true
+func keep_going(this square) bool {
+  if this.num != 0 {
+    return false
+  } else {
+    return true
   }
-  int choices := 0
-  for _, p := range possibly {
+}
+
+func check_column(this square) {
+
+}
+
+func check_row(this square) {
+
+}
+
+func check_local_box(this square) {
+
+}
+
+func update_possibly_list(this square, numbers []int) {
+
+  this.mutex.Lock()
+  for n := range numbers {
+      this.possibly[n] = true
+  }
+  choices := 0
+  for _, p := range this.possibly {
     if p == true {
       choices++
     }
   }
-  mutex.Unlock()
-  if p == 1 {
-    check_possibly_list()
+  this.mutex.Unlock()
+  if choices == 1 {
+    check_possibly_list(this)
   }
 }
 
-func check_possibly_list() {
-  for i, _ := range possibly {
+func check_possibly_list(this square) {
+  for i, p := range this.possibly {
     if p == true {
-      num = i
+      this.num = i
       return
     }
   }
