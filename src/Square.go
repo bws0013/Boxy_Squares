@@ -20,53 +20,53 @@ type square struct {
 //   fmt.Println(possibly)
 // }
 
-func print_stuff(this square) {
-  fmt.Println(this.num)
-  fmt.Println(this.possibly)
+func (s square) print_stuff() {
+  fmt.Println(s.num)
+  fmt.Println(s.possibly)
 }
 
-func keep_going(this square) bool {
-  if this.num != 0 {
+func (s square) keep_going() bool {
+  if s.num != 0 {
     return false
   } else {
     return true
   }
 }
 
-func check_column(this square) {
+func (s square) check_column() {
 
 }
 
-func check_row(this square) {
+func (s square) check_row() {
 
 }
 
-func check_local_box(this square) {
+func (s square) check_local_box() {
 
 }
 
-func update_possibly_list(this square, numbers []int) {
+func (s square) update_possibly_list(numbers []int) {
 
-  this.mutex.Lock()
+  s.mutex.Lock()
   for n := range numbers {
-      this.possibly[n] = true
+      s.possibly[n] = true
   }
   choices := 0
-  for _, p := range this.possibly {
+  for _, p := range s.possibly {
     if p == true {
       choices++
     }
   }
-  this.mutex.Unlock()
+  s.mutex.Unlock()
   if choices == 1 {
-    check_possibly_list(this)
+    s.check_possibly_list()
   }
 }
 
-func check_possibly_list(this square) {
-  for i, p := range this.possibly {
+func (s square) check_possibly_list() {
+  for i, p := range s.possibly {
     if p == true {
-      this.num = i
+      s.num = i
       return
     }
   }
