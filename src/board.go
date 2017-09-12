@@ -10,14 +10,18 @@ import (
   "encoding/csv"
 )
 
-func main() {
-
-  print_board("unsolved/board_easy_1.csv")
-  fmt.Println()
-  m := make_board("unsolved/board_easy_1.csv")
-  print_matrix(m)
-
-}
+// func main() {
+//
+//   print_board("unsolved/board_easy_1.csv")
+//   fmt.Println()
+//
+//
+//   m := make_board("unsolved/board_easy_1.csv")
+//
+//
+//   print_matrix(m)
+//
+// }
 
 // Prints a board given a filename
 func print_board(filename string) {

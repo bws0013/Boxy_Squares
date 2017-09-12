@@ -10,7 +10,7 @@ import (
 // mutex = &sync.Mutex{}
 
 type square struct {
-  num int
+  row, col, num int
   possibly []bool
   mutex sync.Mutex
 }
@@ -41,8 +41,19 @@ func (s square) check_row() {
 
 }
 
-func (s square) check_local_box() {
+func (s square) check_local_box(board [][]int) []int {
+  var nums = make([]int, 9, 9)
 
+  start_row, start_col := (s.row / 3) * 3, (s.col / 3) * 3
+
+  count := 0
+  for i := 0; i < 3; i++ {
+    for j := 0; j < 3; j++ {
+      nums[count] = board[start_row + i][start_col + j]
+      count++
+    }
+  }
+  return nums
 }
 
 func (s square) update_possibly_list(numbers []int) {
