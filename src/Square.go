@@ -15,11 +15,6 @@ type square struct {
   mutex sync.Mutex
 }
 
-// func main() {
-//   fmt.Println(num)
-//   fmt.Println(possibly)
-// }
-
 func (s square) print_stuff() {
   fmt.Println(s.num)
   fmt.Println(s.possibly)
@@ -33,12 +28,26 @@ func (s square) keep_going() bool {
   }
 }
 
-func (s square) check_column() {
+func (s square) check_column(board [][]int) []int {
+  var nums = make([]int, 9, 9)
 
+  count := 0
+  for i := 0; i < 9; i++ {
+    nums[count] = board[i][s.col]
+    count++
+  }
+  return nums
 }
 
-func (s square) check_row() {
+func (s square) check_row(board [][]int) []int {
+  var nums = make([]int, 9, 9)
 
+  count := 0
+  for i := 0; i < 9; i++ {
+    nums[count] = matrix[s.row][i]
+    count++
+  }
+  return nums
 }
 
 func (s square) check_local_box(board [][]int) []int {
@@ -57,7 +66,6 @@ func (s square) check_local_box(board [][]int) []int {
 }
 
 func (s square) update_possibly_list(numbers []int) {
-
   s.mutex.Lock()
   for n := range numbers {
       s.possibly[n] = true

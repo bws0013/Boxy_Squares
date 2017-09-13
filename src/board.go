@@ -23,6 +23,20 @@ import (
 //
 // }
 
+func make_smart_board(filename string) [][]square {
+  basic_board := make_board(filename)
+
+  for i := 0; i < 9; i++ {
+    for j := 0; j < 9; j++ {
+
+    }
+  }
+
+
+
+}
+
+
 // Prints a board given a filename
 func print_board(filename string) {
   f, err := os.Open("../storage/boards/" + filename)

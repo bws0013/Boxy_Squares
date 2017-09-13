@@ -20,20 +20,45 @@ func main() {
   print_matrix(m)
 
   fmt.Println()
+  lb := get_local_box_numbers(3, 5, m)
+  fmt.Println(lb)
 
-  r := get_local_box_numbers(3, 5, m)
-  fmt.Println(m[3][5])
-
+  fmt.Println()
+  r := get_row(3, m)
   fmt.Println(r)
+
+  fmt.Println()
+  c := get_col(3, m)
+  fmt.Println(c)
 
 }
 
+func get_col(col int, matrix [][]int) []int {
+  var nums = make([]int, 9, 9)
+
+  count := 0
+  for i := 0; i < 9; i++ {
+    nums[count] = matrix[i][col]
+    count++
+  }
+  return nums
+}
+
+func get_row(row int, matrix [][]int) []int {
+  var nums = make([]int, 9, 9)
+
+  count := 0
+  for i := 0; i < 9; i++ {
+    nums[count] = matrix[row][i]
+    count++
+  }
+  return nums
+}
 
 func get_local_box_numbers(row, col int, matrix [][]int) []int {
   var nums = make([]int, 9, 9)
 
   start_row, start_col := (row / 3) * 3, (col / 3) * 3
-
   count := 0
   for i := 0; i < 3; i++ {
     for j := 0; j < 3; j++ {
@@ -41,6 +66,5 @@ func get_local_box_numbers(row, col int, matrix [][]int) []int {
       count++
     }
   }
-
   return nums
 }
