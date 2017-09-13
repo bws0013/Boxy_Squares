@@ -11,6 +11,8 @@ import (
   "encoding/csv"
 )
 
+// TODO iterate through each square and call its methods
+
 // func main() {
 //
 //   print_board("unsolved/board_easy_1.csv")
@@ -24,16 +26,22 @@ import (
 //
 // }
 
-func main() {
+var (
+  board_name = "almost/board_almost_solved_1.csv"
+  big_board = make_smart_board(board_name)
+)
 
-  board_name := "unsolved/board_easy_1.csv"
+func main() {
 
   print_board(board_name)
 
   fmt.Println()
-  m := make_smart_board(board_name)
+  full_sequence(big_board[1][0])
 
-  print_smart_board(m)
+  fmt.Println(big_board[1][0])
+  // m := make_smart_board(board_name)
+
+  print_smart_board(big_board)
 
 }
 

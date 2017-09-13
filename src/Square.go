@@ -15,6 +15,20 @@ type square struct {
   mutex sync.Mutex
 }
 
+func full_sequence(s square) {
+  var nums []int
+
+  nums = append(nums, s.check_column()...)
+  nums = append(nums, s.check_row()...)
+  nums = append(nums, s.check_local_box()...)
+
+  s.update_possibly_list(nums)
+
+  // col_nums := s.check_column()
+  // row_nums := s.check_row()
+  // local_box_nums := s.check_local_box()
+}
+
 func (s square) print_stuff() {
   fmt.Println(s.num)
   fmt.Println(s.possibly)
@@ -28,29 +42,29 @@ func (s square) keep_going() bool {
   }
 }
 
-func (s square) check_column(board [][]int) []int {
+func (s square) check_column() []int {
   var nums = make([]int, 9, 9)
 
   count := 0
   for i := 0; i < 9; i++ {
-    nums[count] = board[i][s.col]
+    nums[count] = big_board[i][s.col].num
     count++
   }
   return nums
 }
 
-func (s square) check_row(board [][]int) []int {
+func (s square) check_row() []int {
   var nums = make([]int, 9, 9)
 
   count := 0
   for i := 0; i < 9; i++ {
-    nums[count] = board[s.row][i]
+    nums[count] = big_board[s.row][i].num
     count++
   }
   return nums
 }
 
-func (s square) check_local_box(board [][]int) []int {
+func (s square) check_local_box() []int {
   var nums = make([]int, 9, 9)
 
   start_row, start_col := (s.row / 3) * 3, (s.col / 3) * 3
@@ -58,7 +72,7 @@ func (s square) check_local_box(board [][]int) []int {
   count := 0
   for i := 0; i < 3; i++ {
     for j := 0; j < 3; j++ {
-      nums[count] = board[start_row + i][start_col + j]
+      nums[count] = big_board[start_row + i][start_col + j].num
       count++
     }
   }
@@ -67,8 +81,9 @@ func (s square) check_local_box(board [][]int) []int {
 
 func (s square) update_possibly_list(numbers []int) {
   s.mutex.Lock()
-  for n := range numbers {
-      s.possibly[n] = true
+  for _, n := range numbers {
+    //fmt.Println(n)
+    s.possibly[n] = false
   }
   choices := 0
   for _, p := range s.possibly {
@@ -85,7 +100,7 @@ func (s square) update_possibly_list(numbers []int) {
 func (s square) check_possibly_list() {
   for i, p := range s.possibly {
     if p == true {
-      s.num = i
+      big_board[s.row][s.col].num = i
       return
     }
   }
