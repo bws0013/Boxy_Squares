@@ -9,7 +9,7 @@ import (
   This file is just for testing methods to go into board without cluttering it up.
 */
 
-func main() {
+func example_box_of_squares() {
 
   // print_board("unsolved/board_easy_1.csv")
   // fmt.Println()

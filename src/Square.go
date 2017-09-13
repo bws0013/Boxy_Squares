@@ -44,7 +44,7 @@ func (s square) check_row(board [][]int) []int {
 
   count := 0
   for i := 0; i < 9; i++ {
-    nums[count] = matrix[s.row][i]
+    nums[count] = board[s.row][i]
     count++
   }
   return nums

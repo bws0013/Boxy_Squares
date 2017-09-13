@@ -5,6 +5,7 @@ import (
   "os"
   "fmt"
   "log"
+  "sync"
   "bufio"
   "strconv"
   "encoding/csv"
@@ -23,18 +24,60 @@ import (
 //
 // }
 
+func main() {
+
+  board_name := "unsolved/board_easy_1.csv"
+
+  print_board(board_name)
+
+  fmt.Println()
+  m := make_smart_board(board_name)
+
+  print_smart_board(m)
+
+}
+
 func make_smart_board(filename string) [][]square {
+  row, col := 9, 9
+
   basic_board := make_board(filename)
 
-  for i := 0; i < 9; i++ {
-    for j := 0; j < 9; j++ {
+  smart_board := make([][]square, row)
+  for i := range smart_board {
+      smart_board[i] = make([]square, col)
+  }
 
+  // num int = 0
+  // possibly = []bool{false, true, true, true, true, true, true, true, true, true}
+  // mutex = &sync.Mutex{}
+
+  for i := 0; i < row; i++ {
+    for j := 0; j < col; j++ {
+      var row = i
+      var col = j
+      var num = basic_board[i][j]
+      var possibly = []bool{false, true, true, true, true, true, true, true, true, true}
+      var mutex = sync.Mutex{}
+      possibly[num] = false
+      smart_board[i][j] = square{row, col, num, possibly, mutex}
     }
   }
 
-
-
+  return smart_board
 }
+
+
+func print_smart_board(board [][]square) {
+  row, col := 9, 9
+
+  for i := 0; i < row; i++ {
+    for j := 0; j < col; j++ {
+      fmt.Print(board[i][j].num, " ")
+    }
+    fmt.Println()
+  }
+}
+
 
 
 // Prints a board given a filename
