@@ -16,17 +16,18 @@ type square struct {
 }
 
 func full_sequence(s square) {
+  if s.num == 0 {
+    return
+  }
+
   var nums []int
 
+  // Later we can make each check its own thread to see what happens.
   nums = append(nums, s.check_column()...)
   nums = append(nums, s.check_row()...)
   nums = append(nums, s.check_local_box()...)
 
   s.update_possibly_list(nums)
-
-  // col_nums := s.check_column()
-  // row_nums := s.check_row()
-  // local_box_nums := s.check_local_box()
 }
 
 func (s square) print_stuff() {

@@ -27,22 +27,32 @@ import (
 // }
 
 var (
-  board_name = "almost/board_almost_solved_1.csv"
+  board_name = "unsolved/board_easy_2.csv"
   big_board = make_smart_board(board_name)
 )
 
 func main() {
 
-  print_board(board_name)
-
+  print_big_board()
   fmt.Println()
-  full_sequence(big_board[1][0])
+  print_num_0s_big_board()
+  fmt.Println()
+  for i := 0; i < 50; i++ {
+    run_each_square()
+    print_num_0s_big_board()
+  }
+  fmt.Println()
 
-  fmt.Println(big_board[1][0])
-  // m := make_smart_board(board_name)
+  print_big_board()
+}
 
-  print_smart_board(big_board)
-
+func run_each_square() {
+  row, col := 9, 9
+  for i := 0; i < row; i++ {
+    for j := 0; j < col; j++ {
+      full_sequence(big_board[i][j])
+    }
+  }
 }
 
 func make_smart_board(filename string) [][]square {
@@ -74,6 +84,31 @@ func make_smart_board(filename string) [][]square {
   return smart_board
 }
 
+func print_num_0s_big_board() {
+  row, col := 9, 9
+
+  total_0s := 0
+
+  for i := 0; i < row; i++ {
+    for j := 0; j < col; j++ {
+      if big_board[i][j].num == 0 {
+        total_0s++
+      }
+    }
+  }
+  fmt.Println(total_0s)
+}
+
+func print_big_board() {
+  row, col := 9, 9
+
+  for i := 0; i < row; i++ {
+    for j := 0; j < col; j++ {
+      fmt.Print(big_board[i][j].num, " ")
+    }
+    fmt.Println()
+  }
+}
 
 func print_smart_board(board [][]square) {
   row, col := 9, 9
