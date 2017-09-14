@@ -27,7 +27,7 @@ import (
 // }
 
 var (
-  board_name = "unsolved/board_easy_2.csv"
+  board_name = "unsolved/board_easy_1.csv"
   big_board = make_smart_board(board_name)
 )
 
@@ -37,12 +37,11 @@ func main() {
   fmt.Println()
   print_num_0s_big_board()
   fmt.Println()
-  for i := 0; i < 50; i++ {
+  for i := 0; i < 1; i++ {
     run_each_square()
     print_num_0s_big_board()
   }
   fmt.Println()
-
   print_big_board()
 }
 

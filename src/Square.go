@@ -16,7 +16,7 @@ type square struct {
 }
 
 func full_sequence(s square) {
-  if s.num == 0 {
+  if s.num != 0 {
     return
   }
 
@@ -83,9 +83,10 @@ func (s square) check_local_box() []int {
 func (s square) update_possibly_list(numbers []int) {
   s.mutex.Lock()
   for _, n := range numbers {
-    //fmt.Println(n)
+    // fmt.Println(n)
     s.possibly[n] = false
   }
+  // fmt.Println("++++++++++++++++++++")
   choices := 0
   for _, p := range s.possibly {
     if p == true {
@@ -101,7 +102,17 @@ func (s square) update_possibly_list(numbers []int) {
 func (s square) check_possibly_list() {
   for i, p := range s.possibly {
     if p == true {
+      // fmt.Println()
+      // print_big_board()
+      // fmt.Println(s)
+
+      // Both of the below appear neccessary, one for logic, one for image
+      // But im not entirely sure of the above statement. Check in the morning.
       big_board[s.row][s.col].num = i
+      s.num = i
+      // print_big_board()
+      // fmt.Println(s)
+      // fmt.Println()
       return
     }
   }
