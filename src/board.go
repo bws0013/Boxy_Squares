@@ -11,24 +11,13 @@ import (
   "encoding/csv"
 )
 
-// TODO iterate through each square and call its methods
-
-// func main() {
-//
-//   print_board("unsolved/board_easy_1.csv")
-//   fmt.Println()
-//
-//
-//   m := make_board("unsolved/board_easy_1.csv")
-//
-//
-//   print_matrix(m)
-//
-// }
+// TODO Add more comments.
 
 var (
   board_name = "unsolved/board_easy_1.csv"
   big_board = make_smart_board(board_name)
+  row int = 9
+  col int = 9
 )
 
 func main() {
@@ -36,8 +25,10 @@ func main() {
   print_big_board()
   fmt.Println()
   print_num_0s_big_board()
+  fmt.Println("\n=================")
   fmt.Println()
-  for i := 0; i < 1; i++ {
+
+  for i := 0; i < 5; i++ {
     run_each_square()
     print_num_0s_big_board()
   }
@@ -46,7 +37,6 @@ func main() {
 }
 
 func run_each_square() {
-  row, col := 9, 9
   for i := 0; i < row; i++ {
     for j := 0; j < col; j++ {
       full_sequence(big_board[i][j])
@@ -55,8 +45,6 @@ func run_each_square() {
 }
 
 func make_smart_board(filename string) [][]square {
-  row, col := 9, 9
-
   basic_board := make_board(filename)
 
   smart_board := make([][]square, row)
@@ -84,7 +72,6 @@ func make_smart_board(filename string) [][]square {
 }
 
 func print_num_0s_big_board() {
-  row, col := 9, 9
 
   total_0s := 0
 
@@ -99,7 +86,6 @@ func print_num_0s_big_board() {
 }
 
 func print_big_board() {
-  row, col := 9, 9
 
   for i := 0; i < row; i++ {
     for j := 0; j < col; j++ {
@@ -110,7 +96,6 @@ func print_big_board() {
 }
 
 func print_smart_board(board [][]square) {
-  row, col := 9, 9
 
   for i := 0; i < row; i++ {
     for j := 0; j < col; j++ {
@@ -147,8 +132,8 @@ func print_board(filename string) {
 
 // Prints a 9x9 matrix, fixed dimensions
 func print_matrix(matrix [][]int) {
-  for i := 0; i < 9; i++ {
-    for j := 0; j < 9; j++ {
+  for i := 0; i < row; i++ {
+    for j := 0; j < col; j++ {
       fmt.Print(matrix[i][j], " ")
     }
     fmt.Println()
@@ -157,9 +142,6 @@ func print_matrix(matrix [][]int) {
 
 // Creates a board given a file name
 func make_board(filename string) [][]int {
-  var row, col int
-  row = 9
-  col = 9
 
   f, err := os.Open("../storage/boards/" + filename)
   if err != nil {

@@ -14,7 +14,6 @@ func example_box_of_squares() {
   // print_board("unsolved/board_easy_1.csv")
   // fmt.Println()
 
-
   m := make_board("unsolved/board_easy_1.csv")
 
   print_matrix(m)
