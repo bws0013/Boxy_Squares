@@ -32,6 +32,7 @@ func example_box_of_squares() {
 
 }
 
+// Test for getting the column numbers for a square
 func get_col(col int, matrix [][]int) []int {
   var nums = make([]int, 9, 9)
 
@@ -43,6 +44,7 @@ func get_col(col int, matrix [][]int) []int {
   return nums
 }
 
+// Test for getting the row numbers for a square
 func get_row(row int, matrix [][]int) []int {
   var nums = make([]int, 9, 9)
 
@@ -54,6 +56,7 @@ func get_row(row int, matrix [][]int) []int {
   return nums
 }
 
+// Test for getting local box numbers
 func get_local_box_numbers(row, col int, matrix [][]int) []int {
   var nums = make([]int, 9, 9)
 

@@ -44,6 +44,7 @@ func main() {
   print_big_board()
 }
 
+// Run through the full list of operations on a particular square on the board.
 func run_each_square() {
   for i := 0; i < row; i++ {
     for j := 0; j < col; j++ {
@@ -52,6 +53,7 @@ func run_each_square() {
   }
 }
 
+// Create a board of square objects given a filename
 func make_smart_board(filename string) [][]square {
   basic_board := make_board(filename)
 
@@ -76,6 +78,7 @@ func make_smart_board(filename string) [][]square {
   return smart_board
 }
 
+// Print the number of 0s that appear on the board
 func print_num_0s_big_board() {
 
   total_0s := 0
@@ -90,8 +93,10 @@ func print_num_0s_big_board() {
   fmt.Println(total_0s)
 }
 
+/*
+  Prints the vlaues of the squares of the global board being used.
+*/
 func print_big_board() {
-
   for i := 0; i < row; i++ {
     for j := 0; j < col; j++ {
       fmt.Print(big_board[i][j].num, " ")
@@ -100,6 +105,10 @@ func print_big_board() {
   }
 }
 
+/*
+  A smart_board is what I am calling a board of square structs. This method
+  prints the value of those square structs.
+*/
 func print_smart_board(board [][]square) {
 
   for i := 0; i < row; i++ {
@@ -109,8 +118,6 @@ func print_smart_board(board [][]square) {
     fmt.Println()
   }
 }
-
-
 
 // Prints a board given a filename
 func print_board(filename string) {
