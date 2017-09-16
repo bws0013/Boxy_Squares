@@ -13,9 +13,17 @@ import (
 
 // TODO Add more comments.
 
+// Global variable zone, all of them should go here, no exceptions
 var (
-  board_name = "unsolved/board_easy_1.csv"
+  // The name of the file to be turned into the board
+  // board_name = "almost/board_unsolved_1.csv"
+  // board_name = "unsolved/board_medium_1.csv"
+  board_name = "unsolved/board_hard_1.csv"
+
+  // The board every square interacts with
   big_board = make_smart_board(board_name)
+
+  // row and col are the dimensions of the board, they should be fixed at 9 each
   row int = 9
   col int = 9
 )
@@ -28,7 +36,7 @@ func main() {
   fmt.Println("\n=================")
   fmt.Println()
 
-  for i := 0; i < 5; i++ {
+  for i := 0; i < 10; i++ {
     run_each_square()
     print_num_0s_big_board()
   }
@@ -52,10 +60,7 @@ func make_smart_board(filename string) [][]square {
       smart_board[i] = make([]square, col)
   }
 
-  // num int = 0
-  // possibly = []bool{false, true, true, true, true, true, true, true, true, true}
-  // mutex = &sync.Mutex{}
-
+  // I use var instead of :=  in the loop because I feel it looks clearer in this case
   for i := 0; i < row; i++ {
     for j := 0; j < col; j++ {
       var row = i

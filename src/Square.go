@@ -5,6 +5,17 @@ import (
   "sync"
 )
 
+/*
+Variable explanation for square struct
+  row is the value (0-8) of the square
+  col (column) is the value (0-8) of the square
+  num is the value (1-9) contained in the square (the number you see on the board)
+  possibly is a slice containing the possible values contained in this square
+    if the squares value is 0 than
+    if the squares value is not 0 than
+
+*/
+
 // num int = 0
 // possibly = []bool{false, true, true, true, true, true, true, true, true, true}
 // mutex = &sync.Mutex{}
@@ -102,17 +113,12 @@ func (s square) update_possibly_list(numbers []int) {
 func (s square) check_possibly_list() {
   for i, p := range s.possibly {
     if p == true {
-      // fmt.Println()
-      // print_big_board()
-      // fmt.Println(s)
 
       // Both of the below appear neccessary, one for logic, one for image
       // But im not entirely sure of the above statement. Check in the morning.
       big_board[s.row][s.col].num = i
       s.num = i
-      // print_big_board()
-      // fmt.Println(s)
-      // fmt.Println()
+
       return
     }
   }
